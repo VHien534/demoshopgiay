@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Project_63132041.Models.ChiTietHD>
+
+@{
+    ViewBag.Title = "Pending Orders";
+    Layout = "~/Areas/Admin_63132041/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Đơn đặt hàng</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Mã đơn hàng</th>
+            <th>Mã sản phẩm</th>
+            <th>Số lượng</th>
+            <th>Trạng thái</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.SoHD</td>
+                <td>@item.MaSP</td>
+                <td>@item.SoLuong</td>
+                <td>@item.Status</td>
+                <td>
+                    <button class="btn btn-success" onclick="confirmOrder('@item.SoHD')">Confirm</button>
+                    <button class="btn btn-danger" onclick="cancelOrder('@item.SoHD')">Cancel</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script>
+    function confirmOrder(orderId) {
+        fetch('@Url.Action("ConfirmOrder", "Admin")', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-Token': '@Html.AntiForgeryToken()'
+            },
+            body: JSON.stringify({ id: orderId })
+        }).then(response => response.json())
+          .then(data => {
+              if (data.success) {
+                  alert('Order confirmed.');
+                  location.reload();
+              } else {
+                  alert('Error: ' + data.message);
+              }
+          }).catch(error => {
+              alert('Error: ' + error.message);
+          });
+    }
+
+    function cancelOrder(orderId) {
+        fetch('@Url.Action("CancelOrder", "Admin")', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-Token': '@Html.AntiForgeryToken()'
+            },
+            body: JSON.stringify({ id: orderId })
+        }).then(response => response.json())
+          .then(data => {
+              if (data.success) {
+                  alert('Order cancelled.');
+                  location.reload();
+              } else {
+                  alert('Error: ' + data.message);
+              }
+          }).catch(error => {
+              alert('Error: ' + error.message);
+          });
+    }
+</script>

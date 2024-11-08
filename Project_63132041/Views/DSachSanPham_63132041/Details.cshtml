@@ -1,0 +1,117 @@
+﻿@model Project_63132041.Models.SanPham
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<h2 class="text-center fw-bold">Thông tin sản phẩm</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="product-image text-center">
+                <img src="/Images/@Model.AnhSP" alt="@Model.TenSP" class="img-fluid" />
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="product-info">
+                <h4>@Model.TenSP</h4>
+                <p>@Model.MoTaSP</p>
+                <p>Giá: @Model.DonGia</p>
+                <p>Giảm giá: @Model.Giamgia %</p>
+                <p>Số lượng còn lại: @Model.Soluong</p>
+                <p>Loại sản phẩm: @Model.LoaiSanPham.TenLSP</p>
+
+                <p>
+                    Số lượng:
+                    <input type="number" id="quantity" name="quantity" value="1" min="1" max="@Model.Soluong" class="form-control" />
+                </p>
+
+                <div class="product-buttons text-center">
+                    <button type="button" class="btn btn-primary btn-lg" onclick="buyNow()">Mua Ngay</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p class="text-center">
+    @Html.ActionLink("Quay lại", "Index")
+</p>
+
+<style>
+    .product-image img {
+        max-width: 100%;
+        max-height: 400px;
+    }
+
+    .product-info h4 {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+    }
+
+    .product-info p {
+        margin-bottom: 10px;
+    }
+
+    .product-buttons {
+        margin-top: 20px;
+    }
+</style>
+
+<script>
+    // Hàm thực hiện mua sản phẩm ngay lập tức
+    function buyNow() {
+        var quantity = document.getElementById('quantity').value;
+
+        // Gửi yêu cầu POST để mua sản phẩm
+        fetch('@Url.Action("BuyNow", "DSachSanPham_63132041")', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-Token': '@Html.AntiForgeryToken()'
+            },
+            body: JSON.stringify({ maSP: '@Model.MaSP', soLuong: quantity })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Chuyển hướng đến trang đơn hàng đang chờ xử lý
+                window.location.href = '@Url.Action("PendingOrders", "Admin_63132041")';
+            } else {
+                alert('Có lỗi xảy ra: ' + data.message);
+            }
+        })
+        .catch(error => {
+            alert('Có lỗi xảy ra: ' + error.message);
+        });
+    }
+
+    // Hàm thêm sản phẩm vào giỏ hàng
+    function addToCart() {
+        var quantity = document.getElementById('quantity').value;
+
+        // Gửi yêu cầu POST để thêm sản phẩm vào giỏ hàng
+        fetch('@Url.Action("AddToCart", "DSachSanPham_63132041")', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-Token': '@Html.AntiForgeryToken()'
+            },
+            body: JSON.stringify({ maSP: '@Model.MaSP', soLuong: quantity })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Chuyển hướng đến trang giỏ hàng
+                window.location.href = '@Url.Action("Index", "GioHang_63132041")';
+            } else {
+                alert('Có lỗi xảy ra: ' + data.message);
+            }
+        })
+        .catch(error => {
+            alert('Có lỗi xảy ra: ' + error.message);
+        });
+    }
+</script>

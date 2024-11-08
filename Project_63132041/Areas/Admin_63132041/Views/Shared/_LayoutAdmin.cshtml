@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    <link href="~/Content/StyleAdmin.css" rel="stylesheet" />
+    <style>
+        /* Thêm CSS cho menu */
+        #navbarNav {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body style="margin-top:0px;">
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand fs-2" href="#">VH STORE</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse d-flex justify-content-center fs-5 " id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        @Html.ActionLink("Sản phẩm", "../SanPham_63132041/Index", new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item ps-4">
+                        @Html.ActionLink("Nhân viên", "../NhanVien_63132041/Index", new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item ps-4">
+                        @Html.ActionLink("Khách hàng", "../KhachHang_63132041/Index", new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item ps-4">
+                        @Html.ActionLink("Đơn đặt hàng", "../ChiTietHD_63132041/Index", new { @class = "nav-link" })
+                    </li>
+                </ul>
+            </div>
+            <ul class="navbar-nav ms-auto">
+                @if (Session["user"] != null)
+                {
+                    <li class="nav-item">
+                        <form action="@Url.Action("DangXuat", "login_63132041", new { area = "Admin_63132041" })" method="post" style="display:inline;">
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="btn btn-link nav-link logout btn-light" style="display:inline; border:none; padding:0;">Đăng xuất</button>
+                        </form>
+                    </li>
+                }
+            </ul>
+        </div>
+    </nav>
+    <div id="menu" style="margin-top:10px;">
+        <div>
+            <p align="right">  @ViewBag.NguoiDung</p>
+        </div>
+    </div>
+    <div id="content">
+        @RenderBody()
+    </div>
+    <div id="footer">
+    </div>
+</body>
+</html>

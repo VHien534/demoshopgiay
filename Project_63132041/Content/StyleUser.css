@@ -1,0 +1,160 @@
+﻿body, ul, li, h1, h2, h3, p {
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    .top-bar {
+        background-color: #f1f1f1;
+        padding: 10px 0;
+    }
+
+    .container {
+        width: 80%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .hotline {
+        font-size: 14px;
+    }
+
+    .social-icons {
+        display: flex;
+    }
+
+    .social-icon {
+        margin-left: 10px;
+        text-decoration: none;
+        color: #333;
+    }
+
+    .logo-menu {
+        background-color: #fff;
+        padding: 20px 0;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+        display: inline-block;
+    }
+
+    .menu {
+        display: inline-block;
+        vertical-align: top;
+    }
+
+    .menu ul {
+        list-style: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+
+    .menu li {
+        margin: 0 15px;
+    }
+
+    .menu a {
+        text-decoration: none;
+        color: #333;
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    .logo-menu .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .menu {
+        flex-grow: 1;
+        text-align: center;
+    }
+
+    .logo, .menu {
+        flex: 1;
+    }
+
+    .logo {
+        text-align: left;
+    }
+
+    .menu {
+        text-align: center;
+    }
+
+    .footer {
+        background-color: #f8f9fa;
+        color: black;
+        padding: 20px 0;
+    }
+
+    .footer h4 {
+        font-size: 18px;
+        margin-bottom: 15px;
+        color: black;
+    }
+
+    .footer p, .footer ul, .footer li, .footer a {
+        color: black;
+        font-size: 14px;
+    }
+
+    .footer a {
+        text-decoration: none;
+    }
+
+    .footer a:hover {
+        text-decoration: none;
+        color: #218838;
+    }
+
+    .footer ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .footer ul li {
+        margin-bottom: 10px;
+    }
+
+    .footer .social-media {
+        list-style-type: none;
+        padding: 0;
+        display: flex;
+    }
+
+    .footer .social-media li {
+        margin-right: 50px;
+    }
+
+    .footer .social-media a {
+        display: flex;
+        align-items: center;
+    }
+
+    .footer .social-media i {
+        margin-right: 5px;
+        font-size: 18px;
+        color: black;
+    }
+
+    .footer .row {
+        margin: 0;
+    }
+
+    .footer .col-md-4 {
+        margin-bottom: 20px;
+    }
+
+    .footer .text-center {
+        margin-top: 20px;
+    }

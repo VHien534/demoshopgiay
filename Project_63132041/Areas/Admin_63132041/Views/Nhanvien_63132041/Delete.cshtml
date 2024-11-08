@@ -1,0 +1,134 @@
+﻿@model Project_63132041.Models.Nhanvien
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin_63132041/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+    }
+
+    .delete-container {
+        width: 60%;
+        margin: 50px auto;
+        background: #fff;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .delete-header {
+        background-color: #dc3545;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+        margin: -20px -20px 20px;
+    }
+
+    .details-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+        .details-table caption {
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        .details-table td {
+            padding: 10px;
+            vertical-align: top;
+            border-bottom: 1px solid #ddd;
+        }
+
+            .details-table td.label {
+                font-weight: bold;
+                width: 200px;
+                color: #333;
+            }
+
+            .details-table td.value {
+                color: #555;
+            }
+
+    .form-actions {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+        .form-actions input[type="submit"],
+        .form-actions a {
+            text-decoration: none;
+            color: #fff;
+            background-color: gold;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin-right: 10px;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-actions input[type="submit"] {
+            background-color: #dc3545;
+        }
+
+            .form-actions input[type="submit"]:hover {
+                background-color: #c82333;
+            }
+
+        .form-actions a:hover {
+            background-color: #0056b3;
+        }
+
+        .form-actions a:last-child {
+            margin-right: 0;
+        }
+</style>
+
+<div class="delete-container">
+    <div class="delete-header">Bạn có chắc chắn xóa thông tin này?</div>
+    <table class="details-table">
+        <caption>THÔNG TIN CHI TIẾT</caption>
+        <tr>
+            <td class="label">Mã nhân viên:</td>
+            <td class="value">@Html.DisplayFor(model => model.MaNv)</td>
+        </tr>
+        <tr>
+            <td class="label">Họ tên nhân viên:</td>
+            <td class="value">@Html.DisplayFor(model => model.HoTenNV)</td>
+        </tr>
+        <tr>
+            <td class="label">Email:</td>
+            <td class="value">@Html.DisplayFor(model => model.EmailNV)</td>
+        </tr>
+        <tr>
+            <td class="label">Số điện thoại:</td>
+            <td class="value">@Html.DisplayFor(model => model.SDTnv)</td>
+        </tr>
+        
+        <tr>
+            <td class="label">Quyền sử dụng:</td>
+            <td class="value">@Html.DisplayFor(model => model.QSD)</td>
+        </tr>
+    </table>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions">
+            <input type="submit" value="Xóa" class="btn btn-danger" /> |
+            @Html.ActionLink("Quay lại", "Index", null, new { @class = "btn btn-secondary" })
+        </div>
+    }
+</div>
+

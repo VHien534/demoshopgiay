@@ -1,0 +1,96 @@
+﻿@model Project_63132041.Models.Nguoidung
+
+@{
+    ViewBag.Title = "Đăng ký";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<style>
+    .form-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        background-color: #f9f9f9;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-horizontal .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-horizontal .control-label {
+        text-align: center;
+    }
+
+    .form-horizontal .form-control {
+        margin: 0 auto;
+        display: block;
+    }
+
+    .form-horizontal .btn-primary {
+        width: 50%;
+        margin: 0 auto;
+        display: block;
+    }
+
+    .form-horizontal .btn-link {
+        display: block;
+        margin: 0 auto;
+    }
+    .form-container h2 {
+        color: red;
+    }
+</style>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-container">
+        <h2 class="text-center">@ViewBag.Title</h2>
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group text-center">
+                @Html.LabelFor(model => model.Id, "Tên khách hàng", htmlAttributes: new { @class = "control-label col-md-12" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập tên khách hàng" } })
+                    @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group text-center">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-12" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập email của bạn" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group text-center">
+                @Html.LabelFor(model => model.Password, "Mật khẩu", htmlAttributes: new { @class = "control-label col-md-12" })
+                <div class="col-md-12">
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập mật khẩu" } })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-12 text-center">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-user-plus"></i> Đăng ký
+                    </button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-12 text-center">
+                    @Html.ActionLink("Quay lại", "DangNhap", "login_63132041")
+                </div>`
+            </div>
+        </div>
+    </div>
+}

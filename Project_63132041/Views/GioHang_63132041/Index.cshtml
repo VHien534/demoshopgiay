@@ -1,0 +1,93 @@
+﻿@model List<Project_63132041.Models.GioHang_63132041>
+
+@{
+    ViewBag.Title = "GioHang";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<h2>Giỏ hàng</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Tên sản phẩm</th>
+            <th>Số lượng</th>
+            <th>Đơn giá</th>
+            <th>Ảnh sản phẩm</th>
+            <th>Tổng giá</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.SanPham.TenSP</td>
+                <td>
+                    <input type="number" class="txtQuantity form-control" data-id="@item.SanPham.MaSP" value="@item.SoLuong" min="1" />
+                </td>
+                <td>@item.SanPham.DonGia</td>
+                <td><img src="~/Images/@item.SanPham.AnhSP" alt="@item.SanPham.TenSP" style="width: 50px; height: 50px;" /></td>
+                <td>@(item.SanPham.DonGia * item.SoLuong)</td>
+                <td>
+                    <button class="btn btn-danger" onclick="deleteItem('@item.SanPham.MaSP')">Xóa</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<button class="btn btn-danger" onclick="deleteAllItems()">Clear Cart</button>
+<a href="@Url.Action("Payment", "GioHang_63132041")" class="btn btn-primary">Đặt hàng</a>
+<button id="btnUpdate" class="btn btn-secondary">Cập nhật giỏ hàng</button>
+
+@section Scripts {
+    <script type="text/javascript">
+        function deleteItem(MaSP) {
+            $.ajax({
+                url: '@Url.Action("Delete", "GioHang_63132041")',
+                type: 'POST',
+                data: { MaSP: MaSP },
+                success: function (response) {
+                    if (response.status) {
+                        location.reload();
+                    }
+                }
+            });
+        }
+
+        function deleteAllItems() {
+            $.ajax({
+                url: '@Url.Action("DeleteAll", "GioHang_63132041")',
+                type: 'POST',
+                success: function (response) {
+                    if (response.status) {
+                        location.reload();
+                    }
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            $('#btnUpdate').click(function () {
+                var cart = [];
+                $('.txtQuantity').each(function () {
+                    var MaSP = $(this).data('id');
+                    var SoLuong = $(this).val();
+                    cart.push({ SanPham: { MaSP: MaSP }, SoLuong: SoLuong });
+                });
+
+                $.ajax({
+                    url: '@Url.Action("Update", "GioHang_63132041")',
+                    type: 'POST',
+                    data: { cartModel: JSON.stringify(cart) },
+                    success: function (response) {
+                        if (response.status) {
+                            location.reload();
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+}

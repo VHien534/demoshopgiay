@@ -1,0 +1,123 @@
+﻿@{
+    ViewBag.Title = "DangNhap";
+   
+}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Nhập</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <style>
+        body {
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            margin-top: 100px;
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 20px 10px;
+            text-align: center;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            width: 100%;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            border: none;
+            width: 100%;
+        }
+
+            .btn-primary:hover, .btn-secondary:hover {
+                opacity: 0.8;
+            }
+
+        .btn-group {
+            margin-top: 10px;
+        }
+
+        .social-btn {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+            .social-btn i {
+                margin-right: 10px;
+            }
+
+        .or-separator {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+            .or-separator hr {
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Đăng Nhập</h4>
+                    </div>
+                    <div class="card-body">
+                        @if (ViewBag.Fail != null)
+                        {
+                            <div class="alert alert-danger" role="alert">
+                                @ViewBag.Fail
+                            </div>
+                        }
+                        <form method="post" action="@Url.Action("Dangnhap", "login_63132041", new { area = "Admin_63132041" })">
+                            @Html.AntiForgeryToken()
+                            <div class="form-group">
+                                <input type="email" class="form-control" id="userMail" name="userMail" placeholder="Nhập email" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" id="password" name="Password" placeholder="Nhập mật khẩu" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Đăng Nhập</button>
+                        </form>
+                        <div class="or-separator">
+                            <hr>
+                            <span>hoặc</span>
+                        </div>
+                        
+                        <div class="text-center mt-3">
+                            <span>Bạn chưa có tài khoản?</span>
+                            <a href="@Url.Action("Create", "Nguoidung_63132041", new { area = "Admin_63132041" })" class="btn btn-secondary">Đăng Ký</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

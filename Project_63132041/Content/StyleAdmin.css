@@ -1,0 +1,33 @@
+﻿a {
+    text-decoration: none;
+}
+
+.navbar a {
+    color: #ffffff;
+}
+
+    .navbar a:hover {
+        color: aqua;
+    }
+
+.navbar {
+    background-color: black;
+}
+
+.login-button {
+    background-color: black; /* Màu nền của nút */
+    color: black; /* Màu chữ */
+    border-radius: 50%; /* Để tạo hình tròn */
+    width: 60px; /* Chiều rộng */
+    height: 60px; /* Chiều cao */
+    text-align: center; /* Căn giữa nội dung */
+    line-height: 40px; /* Dòng chữ giữa */
+    font-size: 15px; /* Kích thước chữ */
+    position: absolute; /* Đặt vị trí tuyệt đối */
+    right: 20px; /* Cách lề phải 20px */
+    top: 10px; /* Cách lề trên 10px */
+}
+
+    .login-button:hover {
+        background-color: white; /* Màu nền khi di chuột qua */
+    }
